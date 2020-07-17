@@ -17,12 +17,14 @@ public class HibernateUtil {
         try {
             if (factory == null) {
                 factory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
-                System.out.println("Pegouuuu");
+                System.out.println("Conectado");
 
             }
         } catch (Exception e) {
-            System.out.println("Erroooo");
-            e.printStackTrace();
+            System.out.println("Erro na conexão");
+            System.out.println(e.getMessage());
+            System.out.println("_____");
+            System.out.println(e.getCause());
 
         }
 

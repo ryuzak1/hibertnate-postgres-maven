@@ -69,6 +69,9 @@ public class DaoGerenic<E> {
 
     }
 
+    public EntityManager getEntityManager(){
+        return entityManager;
+    }
 
 
 

@@ -1,16 +1,17 @@
 package model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "consultar.todos",query = "select  u from UsuarioPessoa u")
+})
 public class UsuarioPessoa {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String nome;
     private String sobreNome;
     private String email;
@@ -19,16 +20,28 @@ public class UsuarioPessoa {
 
 
 
+
     public UsuarioPessoa() {
     }
 
 
+    //adicionar o recibmento do relacionamento na tabela ligada.... o mappedBy deve conter o nome da variavel que ligas as classses
+    @OneToMany(mappedBy = "usuarioPessoa",fetch = FetchType.EAGER)
+    private List<TelefoneUsuarios> telefoneUsuariosList;
+
+    public void setTelefoneUsuariosList(List<TelefoneUsuarios> telefoneUsuariosList) {
+        this.telefoneUsuariosList = telefoneUsuariosList;
+    }
+
+    public List<TelefoneUsuarios> getTelefoneUsuariosList() {
+        return telefoneUsuariosList;
+    }
 
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
